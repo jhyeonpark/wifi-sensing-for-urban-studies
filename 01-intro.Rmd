@@ -13,3 +13,8 @@ Chapters and sections are numbered by default. To un-number a heading, add a `{.
 knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown'
 ), 'packages.bib')
+
+usethis::use_github()
+usethis::use_git()
+
+usethis::use_git_remote("origin", url = NULL, overwrite = TRUE)
