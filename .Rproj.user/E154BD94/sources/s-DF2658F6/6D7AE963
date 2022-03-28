@@ -3,11 +3,11 @@
     "path": "~/wifi-sensing-for-urban-studies/01-intro.Rmd",
     "project_path": "01-intro.Rmd",
     "type": "r_markdown",
-    "hash": "0",
+    "hash": "2149639328",
     "contents": "",
     "dirty": false,
     "created": 1648469920397.0,
-    "source_on_save": false,
+    "source_on_save": true,
     "relative_order": 3,
     "properties": {
         "source_window_id": "",
@@ -16,11 +16,11 @@
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1648469938,
+    "lastKnownWriteTime": 1648470537,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1648469938569,
+    "last_content_update": 1648470537248,
     "read_only": false,
     "read_only_alternatives": []
 }
