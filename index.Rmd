@@ -1,6 +1,6 @@
 --- 
-title: "A Minimal Book Example"
-author: "John Doe"
+title: "Urban Sensing Data: A research toolkit for urban studies"
+author: "Juhyeon Park"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
