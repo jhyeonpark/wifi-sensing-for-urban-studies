@@ -19,3 +19,5 @@ sharing-your-book
 publishing
 pages
 metadata-for-sharing
+fig:nice-fig
+tab:nice-tab
