@@ -288,5 +288,8 @@
             "type": "book"
         }
     ],
-    "project_biblios": []
+    "project_biblios": [
+        "book.bib",
+        "packages.bib"
+    ]
 }
