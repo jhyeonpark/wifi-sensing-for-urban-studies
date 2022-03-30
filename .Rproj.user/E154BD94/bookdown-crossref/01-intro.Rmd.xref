@@ -1,4 +1,9 @@
-h1:hello-bookdown Hello bookdown
+h1:getting-started-with-a-pi Getting started with a Pi
+h2:prerequisite Prerequisite
+h2:setting-up-your-pi Setting up your Pi
+h2:connecting-your-pi-to-a-laptop Connecting your Pi to a laptop
+h2:turing-your-pi-into-a-monitoring-tool Turing your Pi into a monitoring tool
+h2:testing-your-pi-in-a-real-world Testing your Pi in a real-world
 h2:a-section A section
 h3:an-unnumbered-section An unnumbered section
 
