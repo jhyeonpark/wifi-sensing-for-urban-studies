@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Prepare a WiFi sensor | How to Use Urban Smart Sensor</title>
+  <meta name="description" content="Chapter 2 Prepare a WiFi sensor | How to Use Urban Smart Sensor" />
+  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Prepare a WiFi sensor | How to Use Urban Smart Sensor" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Prepare a WiFi sensor | How to Use Urban Smart Sensor" />
+  
+  
+  
+
+<meta name="author" content="Juhyeon Park" />
+
+
+<meta name="date" content="2022-03-30" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="wifi-data-preprocessing.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">How to Use Urban Smart Sensor</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction<span></span></a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#about-this-document"><i class="fa fa-check"></i><b>1.1</b> About this document<span></span></a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#scope-of-this-document"><i class="fa fa-check"></i><b>1.2</b> Scope of this document<span></span></a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#why-wifi-sensing"><i class="fa fa-check"></i><b>1.2.1</b> Why WiFi sensing?<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="prepare-a-wifi-sensor.html"><a href="prepare-a-wifi-sensor.html"><i class="fa fa-check"></i><b>2</b> Prepare a WiFi sensor<span></span></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="prepare-a-wifi-sensor.html"><a href="prepare-a-wifi-sensor.html#what-is-a-smart-sensor"><i class="fa fa-check"></i><b>2.1</b> What is a smart sensor?<span></span></a></li>
+<li class="chapter" data-level="2.2" data-path="prepare-a-wifi-sensor.html"><a href="prepare-a-wifi-sensor.html#prerequisite"><i class="fa fa-check"></i><b>2.2</b> Prerequisite<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="wifi-data-preprocessing.html"><a href="wifi-data-preprocessing.html"><i class="fa fa-check"></i><b>3</b> WiFi Data Preprocessing<span></span></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="wifi-data-preprocessing.html"><a href="wifi-data-preprocessing.html#data-description"><i class="fa fa-check"></i><b>3.1</b> Data description<span></span></a></li>
+<li class="chapter" data-level="3.2" data-path="wifi-data-preprocessing.html"><a href="wifi-data-preprocessing.html#data-cleaning"><i class="fa fa-check"></i><b>3.2</b> Data cleaning<span></span></a></li>
+<li class="chapter" data-level="3.3" data-path="wifi-data-preprocessing.html"><a href="wifi-data-preprocessing.html#data-combining"><i class="fa fa-check"></i><b>3.3</b> Data combining<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="wifi-data-analysis.html"><a href="wifi-data-analysis.html"><i class="fa fa-check"></i><b>4</b> WiFi Data Analysis<span></span></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="wifi-data-analysis.html"><a href="wifi-data-analysis.html#count"><i class="fa fa-check"></i><b>4.1</b> Count<span></span></a></li>
+<li class="chapter" data-level="4.2" data-path="wifi-data-analysis.html"><a href="wifi-data-analysis.html#location"><i class="fa fa-check"></i><b>4.2</b> Location<span></span></a></li>
+<li class="chapter" data-level="4.3" data-path="wifi-data-analysis.html"><a href="wifi-data-analysis.html#track"><i class="fa fa-check"></i><b>4.3</b> Track<span></span></a></li>
+<li class="chapter" data-level="4.4" data-path="wifi-data-analysis.html"><a href="wifi-data-analysis.html#identify"><i class="fa fa-check"></i><b>4.4</b> Identify<span></span></a></li>
+<li class="chapter" data-level="4.5" data-path="wifi-data-analysis.html"><a href="wifi-data-analysis.html#activities"><i class="fa fa-check"></i><b>4.5</b> Activities<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html"><i class="fa fa-check"></i><b>5</b> Footnotes and citations<span></span></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html#footnotes"><i class="fa fa-check"></i><b>5.1</b> Footnotes<span></span></a></li>
+<li class="chapter" data-level="5.2" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html#citations"><i class="fa fa-check"></i><b>5.2</b> Citations<span></span></a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">How to Use Urban Smart Sensor</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="prepare-a-wifi-sensor" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Prepare a WiFi sensor<a href="prepare-a-wifi-sensor.html#prepare-a-wifi-sensor" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="what-is-a-smart-sensor" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> What is a smart sensor?<a href="prepare-a-wifi-sensor.html#what-is-a-smart-sensor" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A smart sensor is a device that takes input from the physical environment and uses built-in compute resources to perform predefined functions upon detection of specific input and then process data before passing it on.</p>
+<div class="figure">
+<img src="./static/image/wifi_sensor_comp.png" alt="" />
+<p class="caption">Sensor component</p>
+</div>
+<ol style="list-style-type: decimal">
+<li><strong>A Raspberry Pi</strong> board to build the sensor
+<ul>
+<li>We used Pi 3B/3B+ but you can do the same with a lower model</li>
+</ul></li>
+<li><strong>A WiFi adapter</strong> to capture air WiFi packets
+<ul>
+<li>A WiFi dongle should have a chipset supporting ‘monitoring mode’
+<ul>
+<li>This repo used a Ralink RT5370 chipset; please check your chipset supports this function</li>
+<li>You can use a built-in WiFi chipset, but it generates heat and consumes too much power<br />
+</li>
+</ul></li>
+<li>The three adapters in the figure are intended to collect WiFi data on three WiFi channels (1, 6, and 11, respectively)
+<ul>
+<li>These three non-overlapping channels would be the best choices while there are 13 channels available in the 2.4 GHz range for Wifi in Korea</li>
+</ul></li>
+</ul></li>
+<li><strong>A portable power bank</strong> for sensors that cannot use the power plug
+<ul>
+<li>20000 mAh portable battery lasts approximately one-day in our setting</li>
+</ul></li>
+<li><strong>A micro SD card</strong> of at least 16GB size</li>
+<li>Others
+<ul>
+<li>A Pi camera can be attached</li>
+<li>A bulit-in bluetooth adapter can be used to collect Bluetooth data</li>
+</ul></li>
+</ol>
+</div>
+<div id="prerequisite" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Prerequisite<a href="prepare-a-wifi-sensor.html#prerequisite" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To manage your Raspberry Pi, you need to have a wired LAN or wireless LAN set up on your desktop. You can easily manage your Pi with remote control if your Pi is networked with your desktop.</p>
+<p>You should choose one of the many ways to manage Raspberry Pi
+1. Use</p>
+<p>There are several ways to manage the Raspberry Pi</p>
+<ol style="list-style-type: decimal">
+<li>Format your SD card
+<ul>
+<li><p>You can download the <a href="https://www.sdcard.org/downloads/formatter_4/">SD Formatter software</a></p>
+<p><img src="https://user-images.githubusercontent.com/72984476/155048885-52e4e583-e793-4bff-98db-c28fec14c03b.png" width="50%" height="50%"></p></li>
+</ul></li>
+<li>Install the Raspbian on your SD card
+<ul>
+<li>You can set up the OS using <a href="https://www.raspberrypi.com/software/">Raspberry Pi Imager</a>
+<ul>
+<li>I recommend the Raspberry Pi OS with desktop version if you’re a beginner</li>
+</ul>
+a</li>
+</ul></li>
+</ol>
+<p>Getting the Operating System to install on the Pi</p>
+<p>In order to build a wifi probe catcher the following is required:</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="wifi-data-preprocessing.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/01-intro.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

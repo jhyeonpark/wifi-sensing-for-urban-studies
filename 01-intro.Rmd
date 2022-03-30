@@ -1,27 +1,66 @@
-# Getting started with a Pi
+# How to build a sensor 
 
-All chapters start with a first-level heading followed by your chapter title, like the line above. There should be only one first-level heading (`#`) per .Rmd file.
+## Our sensor
+A smart sensor is a device that takes input from the physical environment and uses built-in compute resources to perform predefined functions upon detection of specific input and then process data before passing it on.
 
-## Prerequisite
-## Setting up your Pi
-## Connecting your Pi to a laptop
-## Turing your Pi into a monitoring tool
-## Testing your Pi in a real-world
+![Sensor component](./static/image/wifi-sensor-comp.png)
+
+1. **A Raspberry Pi** board to build the sensor
+  - We used Pi 3B/3B+ but you can do the same with a lower model
+2. **A WiFi adapter** to capture air WiFi packets
+  - A WiFi dongle should have a chipset supporting 'monitoring mode'
+  - This repo used a Ralink RT5370 chipset; please check your chipset supports this function
+  - You can use a built-in WiFi chipset, but it generates heat and consumes too much power     
+  - The three adapters in the figure are intended to collect WiFi data on three WiFi channels (1, 6, and 11, respectively)
+  - These three non-overlapping channels would be the best choices while there are 13 channels available in the 2.4 GHz range for Wifi in Korea
+3. **A portable power bank** for sensors that cannot use the power plug
+  - 20000 mAh portable battery lasts approximately one-day in our setting
+4. **A micro SD card** of at least 16GB size
+5. Others
+  - A Pi camera can be attached
+  - A built-in Bluetooth adapter can be used to collect Bluetooth data
+
+## How to set up and control your Pi
+
+To manage your Raspberry Pi, you need to have a wired LAN or wireless LAN set up on your desktop. You can easily manage your Pi with remote control if your Pi is networked with your desktop.
+
+### 
 
 
-## A section
 
-All chapter sections start with a second-level (`##`) or higher heading followed by your section title, like the sections above and below here. You can have as many as you want within a chapter.
 
-### An unnumbered section {-}
+You should choose one of the many ways to manage Raspberry Pi
+1. Use 
 
-Chapters and sections are numbered by default. To un-number a heading, add a `{.unnumbered}` or the shorter `{-}` at the end of the heading, like in this section.
 
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
+There are several ways to manage the Raspberry Pi 
 
-usethis::use_github()
-usethis::use_git()
 
-usethis::use_git_remote("origin", url = NULL, overwrite = TRUE)
+1. Format your SD card
+    - You can download the [SD Formatter software](https://www.sdcard.org/downloads/formatter_4/)
+        
+        <img src="https://user-images.githubusercontent.com/72984476/155048885-52e4e583-e793-4bff-98db-c28fec14c03b.png" width="50%" height="50%">
+
+
+
+2. Install the Raspbian on your SD card
+     - You can set up the OS using [Raspberry Pi Imager](https://www.raspberrypi.com/software/)   
+        - I recommend the Raspberry Pi OS with desktop version if you're a beginner
+        
+
+
+
+
+    
+
+
+
+        a
+
+
+
+
+
+Getting the Operating System to install on the Pi
+
+In order to build a wifi probe catcher the following is required:
