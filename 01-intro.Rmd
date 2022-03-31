@@ -1,66 +1,40 @@
 # How to build a sensor 
 
-## Our sensor
-A smart sensor is a device that takes input from the physical environment and uses built-in compute resources to perform predefined functions upon detection of specific input and then process data before passing it on.
+
+## What does the sensor do?
+
+
+
+
+
+The sensor is a device that is designed to measure pedestrian behaviors. Here are 
+This is the figure of Here is our sensor.
+
+Sensing Function Packs provide reference solutions to: -
 
 ![Sensor component](./static/image/wifi-sensor-comp.png)
 
-1. **A Raspberry Pi** board to build the sensor
-  - We used Pi 3B/3B+ but you can do the same with a lower model
-2. **A WiFi adapter** to capture air WiFi packets
-  - A WiFi dongle should have a chipset supporting 'monitoring mode'
-  - This repo used a Ralink RT5370 chipset; please check your chipset supports this function
-  - You can use a built-in WiFi chipset, but it generates heat and consumes too much power     
-  - The three adapters in the figure are intended to collect WiFi data on three WiFi channels (1, 6, and 11, respectively)
-  - These three non-overlapping channels would be the best choices while there are 13 channels available in the 2.4 GHz range for Wifi in Korea
-3. **A portable power bank** for sensors that cannot use the power plug
+
+## Prerequisite
+### Hardware
+| Item                  | Function                           | Requirement                    |
+|-----------------------|------------------------------------|--------------------------------|
+| Laptop and LAN cable  | To access and control your sensor  |                                |
+| Raspberry Pi board    | To build your sensor               | Pi 3B/3B+ or a higher model Pi |
+| WiFi adapter          | To capture WiFi packets            | Check your chipset that supports 'monitoring mode' [here](https://unix.stackexchange.com/questions/614984/supported-chipset-for-monitor-mode-and-packet-injection-in-kali-linux) |
+| Micro SD card  | To build and store the data   | At least 16 GB size |
+| Portable power bank | To run the sensor in outdoor environment | +20000 mAh battery </br> * It lasts one-day in our setting |
+| Pi camera  | To record the scene in the front of sensor  |                      |
+
+`r emo::ji("check")` **A laptop and lan cable** to control your sensor  
+`r emo::ji("check")` **A Raspberry Pi** board to build your sensor  
+`r emo::ji("check")` **A WiFi adapter** supporting 'monitoring mode'; please check your chipset [here](https://unix.stackexchange.com/questions/614984/supported-chipset-for-monitor-mode-and-packet-injection-in-kali-linux)  
+`r emo::ji("check")` **A micro SD card** of at least 16GB size  
+`r emo::ji("check")` **A portable power bank** for sensing in outdoor environment that is difficult to supply power  
   - 20000 mAh portable battery lasts approximately one-day in our setting
-4. **A micro SD card** of at least 16GB size
-5. Others
-  - A Pi camera can be attached
-  - A built-in Bluetooth adapter can be used to collect Bluetooth data
 
-## How to set up and control your Pi
+`r emo::ji("check")` **A Pi camera** if you want to record the scene in the front of sensor
 
-To manage your Raspberry Pi, you need to have a wired LAN or wireless LAN set up on your desktop. You can easily manage your Pi with remote control if your Pi is networked with your desktop.
+### Skill
+Learning R and Python will be necessary for sensor building and data analysis. I recommend these classes: [Data Science: Foundations using R Specialization](https://www.coursera.org/specializations/data-science-foundations-r) and [Python for Everybody Specialization](https://www.coursera.org/specializations/python)
 
-### 
-
-
-
-
-You should choose one of the many ways to manage Raspberry Pi
-1. Use 
-
-
-There are several ways to manage the Raspberry Pi 
-
-
-1. Format your SD card
-    - You can download the [SD Formatter software](https://www.sdcard.org/downloads/formatter_4/)
-        
-        <img src="https://user-images.githubusercontent.com/72984476/155048885-52e4e583-e793-4bff-98db-c28fec14c03b.png" width="50%" height="50%">
-
-
-
-2. Install the Raspbian on your SD card
-     - You can set up the OS using [Raspberry Pi Imager](https://www.raspberrypi.com/software/)   
-        - I recommend the Raspberry Pi OS with desktop version if you're a beginner
-        
-
-
-
-
-    
-
-
-
-        a
-
-
-
-
-
-Getting the Operating System to install on the Pi
-
-In order to build a wifi probe catcher the following is required:

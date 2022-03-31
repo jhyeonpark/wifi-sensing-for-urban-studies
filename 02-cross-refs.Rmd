@@ -1,9 +1,35 @@
-# WiFi Data Preprocessing
+# Getting started with Pi
 
-Cross-references make it easier for your readers to find and link to elements in your book.
+## How to set up your Pi
 
-## Data description
+#### Install the Raspbian on your SD card
 
-## Data cleaning
 
-## Data combining
+#### Step 1: Install the Raspbian on your SD card {-}
+1. You need to format your SD card first using [SD Formatter software](https://www.sdcard.org/downloads/formatter_4/).  
+- Install the Raspbian on your SD card
+  - You can set up the OS using [Raspberry Pi Imager](https://www.raspberrypi.com/software/). I recommend the Raspberry Pi OS with desktop version if
+  you're a beginner
+  
+#### Step 2: Install the Raspbian on your SD card {-}
+
+
+        
+        
+To manage your Raspberry Pi, you need to have a wired LAN or wireless LAN set up on your desktop. You can easily manage your Pi with remote control if your Pi is networked with your desktop.
+
+### 
+
+
+
+
+You should choose one of the many ways to manage Raspberry Pi
+1. Use 
+
+
+There are several ways to manage the Raspberry Pi 
+
+
+
+        
+

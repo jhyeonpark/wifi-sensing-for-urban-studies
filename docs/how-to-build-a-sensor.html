@@ -23,7 +23,7 @@
 <meta name="author" content="Juhyeon Park" />
 
 
-<meta name="date" content="2022-03-30" />
+<meta name="date" content="2022-03-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="index.html"/>
-<link rel="next" href="wifi-data-preprocessing.html"/>
+<link rel="next" href="getting-started-with-pi.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -104,17 +104,19 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="2" data-path="how-to-build-a-sensor.html"><a href="how-to-build-a-sensor.html"><i class="fa fa-check"></i><b>2</b> How to build a sensor<span></span></a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="how-to-build-a-sensor.html"><a href="how-to-build-a-sensor.html#our-sensor"><i class="fa fa-check"></i><b>2.1</b> Our sensor<span></span></a></li>
-<li class="chapter" data-level="2.2" data-path="how-to-build-a-sensor.html"><a href="how-to-build-a-sensor.html#how-to-set-up-and-control-your-pi"><i class="fa fa-check"></i><b>2.2</b> How to set up and control your Pi<span></span></a>
+<li class="chapter" data-level="2.1" data-path="how-to-build-a-sensor.html"><a href="how-to-build-a-sensor.html#what-does-the-sensor-do"><i class="fa fa-check"></i><b>2.1</b> What does the sensor do?<span></span></a></li>
+<li class="chapter" data-level="2.2" data-path="how-to-build-a-sensor.html"><a href="how-to-build-a-sensor.html#prerequisite"><i class="fa fa-check"></i><b>2.2</b> Prerequisite<span></span></a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="how-to-build-a-sensor.html"><a href="how-to-build-a-sensor.html#section"><i class="fa fa-check"></i><b>2.2.1</b> </a></li>
+<li class="chapter" data-level="2.2.1" data-path="how-to-build-a-sensor.html"><a href="how-to-build-a-sensor.html#hardware"><i class="fa fa-check"></i><b>2.2.1</b> Hardware<span></span></a></li>
+<li class="chapter" data-level="2.2.2" data-path="how-to-build-a-sensor.html"><a href="how-to-build-a-sensor.html#skill"><i class="fa fa-check"></i><b>2.2.2</b> Skill<span></span></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="wifi-data-preprocessing.html"><a href="wifi-data-preprocessing.html"><i class="fa fa-check"></i><b>3</b> WiFi Data Preprocessing<span></span></a>
+<li class="chapter" data-level="3" data-path="getting-started-with-pi.html"><a href="getting-started-with-pi.html"><i class="fa fa-check"></i><b>3</b> Getting started with Pi<span></span></a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="wifi-data-preprocessing.html"><a href="wifi-data-preprocessing.html#data-description"><i class="fa fa-check"></i><b>3.1</b> Data description<span></span></a></li>
-<li class="chapter" data-level="3.2" data-path="wifi-data-preprocessing.html"><a href="wifi-data-preprocessing.html#data-cleaning"><i class="fa fa-check"></i><b>3.2</b> Data cleaning<span></span></a></li>
-<li class="chapter" data-level="3.3" data-path="wifi-data-preprocessing.html"><a href="wifi-data-preprocessing.html#data-combining"><i class="fa fa-check"></i><b>3.3</b> Data combining<span></span></a></li>
+<li class="chapter" data-level="3.1" data-path="getting-started-with-pi.html"><a href="getting-started-with-pi.html#how-to-set-up-your-pi"><i class="fa fa-check"></i><b>3.1</b> How to set up your Pi<span></span></a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="getting-started-with-pi.html"><a href="getting-started-with-pi.html#section"><i class="fa fa-check"></i><b>3.1.1</b> </a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="wifi-data-analysis.html"><a href="wifi-data-analysis.html"><i class="fa fa-check"></i><b>4</b> WiFi Data Analysis<span></span></a>
 <ul>
@@ -151,70 +153,77 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="how-to-build-a-sensor" class="section level1 hasAnchor" number="2">
 <h1><span class="header-section-number">Chapter 2</span> How to build a sensor<a href="how-to-build-a-sensor.html#how-to-build-a-sensor" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="our-sensor" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> Our sensor<a href="how-to-build-a-sensor.html#our-sensor" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>A smart sensor is a device that takes input from the physical environment and uses built-in compute resources to perform predefined functions upon detection of specific input and then process data before passing it on.</p>
+<div id="what-does-the-sensor-do" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> What does the sensor do?<a href="how-to-build-a-sensor.html#what-does-the-sensor-do" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The sensor is a device that is designed to measure pedestrian behaviors. Here are
+This is the figure of Here is our sensor.</p>
+<p>Sensing Function Packs provide reference solutions to: -</p>
 <div class="figure">
 <img src="static/image/wifi-sensor-comp.png" alt="" />
 <p class="caption">Sensor component</p>
 </div>
-<ol style="list-style-type: decimal">
-<li><strong>A Raspberry Pi</strong> board to build the sensor</li>
-</ol>
-<ul>
-<li>We used Pi 3B/3B+ but you can do the same with a lower model</li>
-</ul>
-<ol start="2" style="list-style-type: decimal">
-<li><strong>A WiFi adapter</strong> to capture air WiFi packets</li>
-</ol>
-<ul>
-<li>A WiFi dongle should have a chipset supporting ‘monitoring mode’</li>
-<li>This repo used a Ralink RT5370 chipset; please check your chipset supports this function</li>
-<li>You can use a built-in WiFi chipset, but it generates heat and consumes too much power<br />
-</li>
-<li>The three adapters in the figure are intended to collect WiFi data on three WiFi channels (1, 6, and 11, respectively)</li>
-<li>These three non-overlapping channels would be the best choices while there are 13 channels available in the 2.4 GHz range for Wifi in Korea</li>
-</ul>
-<ol start="3" style="list-style-type: decimal">
-<li><strong>A portable power bank</strong> for sensors that cannot use the power plug</li>
-</ol>
-<ul>
-<li>20000 mAh portable battery lasts approximately one-day in our setting</li>
-</ul>
-<ol start="4" style="list-style-type: decimal">
-<li><strong>A micro SD card</strong> of at least 16GB size</li>
-<li>Others</li>
-</ol>
-<ul>
-<li>A Pi camera can be attached</li>
-<li>A built-in Bluetooth adapter can be used to collect Bluetooth data</li>
-</ul>
 </div>
-<div id="how-to-set-up-and-control-your-pi" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> How to set up and control your Pi<a href="how-to-build-a-sensor.html#how-to-set-up-and-control-your-pi" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>To manage your Raspberry Pi, you need to have a wired LAN or wireless LAN set up on your desktop. You can easily manage your Pi with remote control if your Pi is networked with your desktop.</p>
-<div id="section" class="section level3" number="2.2.1">
-<h3><span class="header-section-number">2.2.1</span> </h3>
-<p>You should choose one of the many ways to manage Raspberry Pi
-1. Use</p>
-<p>There are several ways to manage the Raspberry Pi</p>
-<ol style="list-style-type: decimal">
-<li>Format your SD card
-<ul>
-<li><p>You can download the <a href="https://www.sdcard.org/downloads/formatter_4/">SD Formatter software</a></p>
-<p><img src="https://user-images.githubusercontent.com/72984476/155048885-52e4e583-e793-4bff-98db-c28fec14c03b.png" width="50%" height="50%"></p></li>
-</ul></li>
-<li>Install the Raspbian on your SD card
-<ul>
-<li>You can set up the OS using <a href="https://www.raspberrypi.com/software/">Raspberry Pi Imager</a>
-<ul>
-<li>I recommend the Raspberry Pi OS with desktop version if you’re a beginner</li>
-</ul>
-a</li>
-</ul></li>
-</ol>
-<p>Getting the Operating System to install on the Pi</p>
-<p>In order to build a wifi probe catcher the following is required:</p>
+<div id="prerequisite" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Prerequisite<a href="how-to-build-a-sensor.html#prerequisite" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="hardware" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Hardware<a href="how-to-build-a-sensor.html#hardware" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="39%" />
+<col width="35%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Item</th>
+<th>Function</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Laptop and LAN cable</td>
+<td>To access and control your sensor</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Raspberry Pi board</td>
+<td>To build your sensor</td>
+<td>Pi 3B/3B+ or a higher model Pi</td>
+</tr>
+<tr class="odd">
+<td>WiFi adapter</td>
+<td>To capture WiFi packets</td>
+<td>Check your chipset that supports ‘monitoring mode’ <a href="https://unix.stackexchange.com/questions/614984/supported-chipset-for-monitor-mode-and-packet-injection-in-kali-linux">here</a></td>
+</tr>
+<tr class="even">
+<td>Micro SD card</td>
+<td>To build and store the data</td>
+<td>At least 16 GB size</td>
+</tr>
+<tr class="odd">
+<td>Portable power bank</td>
+<td>To run the sensor in outdoor environment</td>
+<td>+20000 mAh battery </br> * It lasts one-day in our setting</td>
+</tr>
+<tr class="even">
+<td>Pi camera</td>
+<td>To record the scene in the front of sensor</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>✅ <strong>A laptop and lan cable</strong> to control your sensor<br />
+✅ <strong>A Raspberry Pi</strong> board to build your sensor<br />
+✅ <strong>A WiFi adapter</strong> supporting ‘monitoring mode’; please check your chipset <a href="https://unix.stackexchange.com/questions/614984/supported-chipset-for-monitor-mode-and-packet-injection-in-kali-linux">here</a><br />
+✅ <strong>A micro SD card</strong> of at least 16GB size<br />
+✅ <strong>A portable power bank</strong> for sensing in outdoor environment that is difficult to supply power<br />
+- 20000 mAh portable battery lasts approximately one-day in our setting</p>
+<p>✅ <strong>A Pi camera</strong> if you want to record the scene in the front of sensor</p>
+</div>
+<div id="skill" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Skill<a href="how-to-build-a-sensor.html#skill" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Learning R and Python will be necessary for sensor building and data analysis. I recommend these classes: <a href="https://www.coursera.org/specializations/data-science-foundations-r">Data Science: Foundations using R Specialization</a> and <a href="https://www.coursera.org/specializations/python">Python for Everybody Specialization</a></p>
 
 </div>
 </div>
@@ -225,7 +234,7 @@ a</li>
         </div>
       </div>
 <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="wifi-data-preprocessing.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="getting-started-with-pi.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
