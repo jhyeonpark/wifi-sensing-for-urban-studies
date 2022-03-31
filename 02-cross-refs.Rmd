@@ -1,60 +1,185 @@
-# Getting started with Pi
+# How to build a sensor
 
-## How to set up your Pi
+## Getting started with Pi
 
-#### Install the Raspbian on your SD card
+### Step 1: Install the OS of Pi on your SD card {-}
+1. Plug in your SD card on your laptop and open the Raspberry OS imager and `format` your SD card.  
+![](./static/image/imager-format.gif)
 
+2. Write the Raspberry Pi OS on your SD card. Please enable `ssh` and set username (pi) and password (raspberry) in the setting before the writing.  
+![](./static/image/imager-write.gif)
 
-#### Step 1: Install the Pi OS on your SD card {-}
-1. Download the [Raspberry Pi Imager](https://www.raspberrypi.com/software/) 
-<img src = "./static/image/pi-imager.png" alt="drawing" width="500"/>
+---
 
-2. Plug in your SD card on your laptop.
-
-3. Open the imager and format your SD card.  
-<img src = "./static/image/imager-format.gif" alt="drawing" width="500"/>
-
-3. Write the Raspberry Pi OS on your SD card. Please enable `ssh` and set username (pi) and password (raspberry) in the setting before the writing.  
-<img src = "./static/image/imager-write.gif" alt="drawing" width="500"/>
-
-#### Step 2: Connect the Pi on your laptop {-}
+### Step 2: Connect the Pi on your laptop {-}
 This enables your laptop to access and control your Pi via *a network cable*. We don't need to buy and use a screen, keyboard and mouse that can be attached to the Pi.
 
-1. Plug in your SD card on the Pi and connect the Pi on your laptop via a Ethernet cable. 
-<img src = "./static/image/pi-connect.jpg" alt="drawing" width="500"/>
+1. Plug in your SD card on the Pi and connect the Pi on your laptop via a Ethernet cable.  
+![](./static/image/pi-connect.jpg)
 
-2. 
+2. Enable `internet connection sharing option` on your WiFI adapter.  
+![](./static/image/network-sharing.gif)
 
-3. 
+3. Find and remember the `IP address of your Pi`. 1) Press the window key button; 2) type in `cmd`, 3) type in `arp -a`, 4) search the IP address of Raspberry Pi by looking the first 6 characters of physical address
 
-4. 
+    > MAC Address Lookup: MAC addresses of the all devices of Raspberry Pi Foundation start with `B8:27:EB:xx:xx:xx` or `DC:A6:32:xx:xx:xx`.  
+
+    ![](./static/image/pi-ip.png)
+
+4. Access your Pi by Putty by typing the IP address in the host name.  
+![Sensor component](./static/image/pi-putty.png)
+
+5. Log in your Pi with the default setting (ID: pi, password: raspberry). Type `ping 8.8.8.8` to see if your Pi can use the Internet.  
+![Sensor component](./static/image/pi-ping.gif)
+
+### Step 3: Set up your Pi {-}
+1. Update your Pi and packages:
+    ```{console}
+    sudo apt-get update -y && sudo apt-get upgrade -y
+    ```
+
+2. Install packages we use:
+    ```{console}
+    sudo apt-get install git python3-pip python3-dpkt python3-pcapy python3-schedule python3-picamera python3-dropbox libbluetooth-dev -y    
+    ```
+
+3. Set up the wireless setting on your phone hot spot 
+    ```{console}
+    sudo nano /etc/wpa_supplicant/wpa_supplicant.conf    
+    ```
+    - Put your mobile hot spot information (to me, *juhyeon9087* for both SSID and password)
+    ```{console}
+    country=GB
+    network={
+     ssid="juhyeon9087"
+     psk="juhyeon9087"
+     key_mgmt=WPA-PSK
+    }
+    ```
+
+4. Set up camera by turning on `interface Options` - `Legacy Camera`
+    ```{console}
+    sudo raspi-config
+    ```
+
+5. Set up Dropbox on your Pi.
+    - Get your Dropbox access key first
+      - Create a app in the developer site of Dropbox [here](https://www.dropbox.com/developers/apps/create)
+      - Select access more scopes:  
+      Move into `Permissions` and check more access
+      
+    - Clone this script to the Raspberry Pi
+      ```{console}
+      git clone https://github.com/andreafabrizi/Dropbox-Uploader.git
+      ```
+    - Move into the cloned folder:  
+      ```{console}
+      cd Dropbox-Uploader
+      ```
+    - Give the `dropbox_uploader.sh` script:  
+      ```{console}
+      sudo chmod +x dropbox_uploader.sh
+      ```
+    - Run the `dropbox_uploader.sh` script:  
+      ```{console}
+      ./dropbox_uploader.sh
+      ```
+    - Copy and paste your `app key` and `app secret`
+    - Cope and paste of the terminal URL to your search engine and put your `access code`
+    
+
+### Step 4: Test and play your your Pi {-}
+1. Detecting WiFi packets
+    - Plug in a WiFi adapter on your Pi and type this:
+    ```{console}
+    pi@raspberrypi:~ $ iwconfig
+    lo        no wireless extensions.
+     
+    eth0      no wireless extensions.
+     
+    wlan0     IEEE 802.11  ESSID:off/any
+              Mode:Managed  Access Point: Not-Associated
+              Retry short limit:7   RTS thr:off   Fragment thr:off
+              Power Management:on
+     
+    wlan1     IEEE 802.11  ESSID:off/any
+              Mode:Managed  Access Point: Not-Associated   Tx-Power=20 dBm
+              Retry short  long limit:2   RTS thr:off   Fragment thr:off
+              Power Management:off
+
+    ```
+    - You will see `wlan1`, which you couldn't see before plugging in. `wlan0` is the onboard WiFi.
+    - Install the `aircrack-ng` tool
+    ```{console}
+    sudo apt-get install -y aircrack-ng
+    ```
+    - Put the `wlan1` in monitoring mode
+    ```{console}
+    sudo airmon-ng start wlan1
+    ```
+    - With the monitoring mode adapter, execute this to scan for nearby WiFi devices
+    ```{console}
+    sudo airodump-ng wlan1mon
+    ```
+    ![Sensor component](./static/image/test-wifi.gif)
+
+3. Sending a file on your dropbox
+    - Move on the `Dropbox-Uploader` folder (`cd ..` is going back to home folder)
+    ```{console}
+    cd Dropbox-Uploader
+    ```
+    - Get the list of Dropbox file list
+    ```{console}
+    root@raspberrypi:/home/pi/Dropbox-Uploader# ./dropbox_uploader.sh list
+    > Listing "/"... DONE
+    [D]  External Drive.dbx-external-drive
+    ```
+    - Upload one file on your Dropbox
+    ```{console}
+    root@raspberrypi:/home/pi/Dropbox-Uploader# ./dropbox_uploader.sh upload README.md /
+    > Uploading "/home/pi/Dropbox-Uploader/README.md" to "/README.md"... DONE
+    ```
+    - Recheck the uploaded file on your Dropbox
+    ```{console}
+    root@raspberrypi:/home/pi/Dropbox-Uploader# ./dropbox_uploader.sh list
+    > Listing "/"... DONE
+    [D]      External Drive.dbx-external-drive
+    [F] 9373 README.md
+    ```
+
+4. Detecting Bluetooth packets
+    - Clone a simple Bluetooth packet collector
+    ```{console}
+    git clone https://github.com/MS3FGX/Bluelog.git   
+    ```
+    - Move on the folder
+    ```{console}
+    cd Bluelog
+    ```
+    - `make` and run the code by typing `./bluelog -vmfn`
+
+5. Take a shot by Pi camera
+    - Check the attached camera
+    ```{console}
+    vcgencmd get_camera    
+    supported=1 detected=1
+    ```
+    - Enter the command:
+    ```{console}
+    raspistill -o test.jpg
+    ```
+    
+### Step 5: Make our Pi as a sensor {-}
+- Download [Filezlia](https://filezilla-project.org/) and the code [here](./static/file/start.py)
+
+<a id="raw-url" href="./static/file/start.py">Download FILE</a>
+
+
+[File Name](url).
+- Move the 
 
 
 
-<!-- ![](./static/image/pi-connect.jpg) -->
 
 
-
-
-#### Step 2: Install the Raspbian on your SD card {-}
-
-
-        
-        
-To manage your Raspberry Pi, you need to have a wired LAN or wireless LAN set up on your desktop. You can easily manage your Pi with remote control if your Pi is networked with your desktop.
-
-### 
-
-
-
-
-You should choose one of the many ways to manage Raspberry Pi
-1. Use 
-
-
-There are several ways to manage the Raspberry Pi 
-
-
-
-        
 

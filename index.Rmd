@@ -9,7 +9,7 @@ link-citations: yes
 github-repo: rstudio/bookdown-demo
 ---
 
-# Introduction
+# Preface
 
 ## About this document
 This document provides useful information for individuals who are interested in **urban sensing** with commercially available lower-cost sensors. Many governments have launched a sensing project that involves a series of sensors placed around the city for capturing a massive amount of data including pedestrian, vehicle, temperature, and air quality. Here are some examples: the [Array of Things (AoT) in Chicago, USA](https://arrayofthings.github.io/) and [S-DoT in Seoul, Korea](https://github.com/seoul-iotdata/S-DoT_SampleData). With the rapid development of the Internet-of-Things (IoTs), the do-it-yourself (DIY) technologies attempt to democratize these monitoring practices that may be the domain of expert scientists. Our target audience are individuals who want to learn **how to build the urban DIY sensors**.
