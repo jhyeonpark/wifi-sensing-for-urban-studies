@@ -5,12 +5,37 @@
 #### Install the Raspbian on your SD card
 
 
-#### Step 1: Install the Raspbian on your SD card {-}
-1. You need to format your SD card first using [SD Formatter software](https://www.sdcard.org/downloads/formatter_4/).  
-- Install the Raspbian on your SD card
-  - You can set up the OS using [Raspberry Pi Imager](https://www.raspberrypi.com/software/). I recommend the Raspberry Pi OS with desktop version if
-  you're a beginner
-  
+#### Step 1: Install the Pi OS on your SD card {-}
+1. Download the [Raspberry Pi Imager](https://www.raspberrypi.com/software/) 
+<img src = "./static/image/pi-imager.png" alt="drawing" width="500"/>
+
+2. Plug in your SD card on your laptop.
+
+3. Open the imager and format your SD card.  
+<img src = "./static/image/imager-format.gif" alt="drawing" width="500"/>
+
+3. Write the Raspberry Pi OS on your SD card. Please enable `ssh` and set username (pi) and password (raspberry) in the setting before the writing.  
+<img src = "./static/image/imager-write.gif" alt="drawing" width="500"/>
+
+#### Step 2: Connect the Pi on your laptop {-}
+This enables your laptop to access and control your Pi via *a network cable*. We don't need to buy and use a screen, keyboard and mouse that can be attached to the Pi.
+
+1. Plug in your SD card on the Pi and connect the Pi on your laptop via a Ethernet cable. 
+<img src = "./static/image/pi-connect.jpg" alt="drawing" width="500"/>
+
+2. 
+
+3. 
+
+4. 
+
+
+
+<!-- ![](./static/image/pi-connect.jpg) -->
+
+
+
+
 #### Step 2: Install the Raspbian on your SD card {-}
 
 

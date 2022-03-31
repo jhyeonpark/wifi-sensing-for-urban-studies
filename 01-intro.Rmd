@@ -22,9 +22,11 @@ Sensing Function Packs provide reference solutions to: -
 | Laptop and LAN cable  | To access and control your sensor  |                                |
 | Raspberry Pi board    | To build your sensor               | Pi 3B/3B+ or a higher model Pi |
 | WiFi adapter          | To capture WiFi packets            | Check your chipset that supports 'monitoring mode' [here](https://unix.stackexchange.com/questions/614984/supported-chipset-for-monitor-mode-and-packet-injection-in-kali-linux) |
-| Micro SD card  | To build and store the data   | At least 16 GB size |
+| Micro SD card and adapter  | To build and store the data   | At least 16 GB size |
+| Ethernet cable  | To connect the Pi with your laptop   | |
 | Portable power bank | To run the sensor in outdoor environment | +20000 mAh battery </br> * It lasts one-day in our setting |
 | Pi camera  | To record the scene in the front of sensor  |                      |
+
 
 `r emo::ji("check")` **A laptop and lan cable** to control your sensor  
 `r emo::ji("check")` **A Raspberry Pi** board to build your sensor  
