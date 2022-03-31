@@ -24,7 +24,7 @@ This document demonstrates 1) **how to build a smart sensor** that detects pedes
 ### Why WiFi sensing?
 **WiFi sensing technologies** is one of them as a non-invasive tool for *monitoring pedestrians* outdoor via sensors that detect WiFi packets sent regularly by access points (APs) and WiFi-enabled devices. Most pedestrians today carry smart devices equipped with WiFi network interfaces, and each WiFi packet includes unique 48-bit addresses, known as Media Access Control (MAC) addresses, enabling a device to be tracked by multiple WiFi sensors. Many recent papers used the sensing technologies to identify pedestrian movement and behaviors[^1][^2][^3].
 
-![Concept of WiFi sensing technologies](./static/image/wifi-sensing.png)
+![Concept of WiFi sensing technologies](./static/image/wifi-sensing-concept.png)
 
 [^1]: Duives, D. C., van Oijen, T., & Hoogendoorn, S. P. (2020). Enhancing Crowd Monitoring System Functionality through Data Fusion: Estimating Flow Rate from Wi-Fi Traces and Automated Counting System Data. Sensors (Basel), 20(21). https://doi.org/10.3390/s20216032
 [^2]: Soundararaj, B., Cheshire, J., & Longley, P. (2019). Estimating real-time high-street footfall from Wi-Fi probe requests. International Journal of Geographical Information Science, 34(2), 325-343,. https://doi.org/10.1080/13658816.2019.1587616 
