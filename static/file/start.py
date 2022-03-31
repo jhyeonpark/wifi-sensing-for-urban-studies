@@ -1,13 +1,40 @@
-## Import packages
+# Importing packages
 import os, time
 from multiprocessing import Pool
-import sys, signal, requests, csv, hashlib, binascii, subprocess, logging, traceback, random
-import time, multiprocessing, threading, Queue, sqlite3, pcapy, dpkt, socket, struct, 
+# Importing packages
+import signal, requests, csv
+import sys
+import hashlib
+import os
+import logging
+import traceback
+import random
+import time
+import multiprocessing
+import threading
+import Queue
+import sqlite3
+import pcapy
+import dpkt
+import socket
+import struct
 import datetime as dt
 from multiprocessing import Process
-import dropboxm, picamera, schedule
+import os, time
+import dropbox
 from dropbox.exceptions import ApiError, AuthError
 from requests.exceptions import ConnectionError
+import picamera, threading
+import sys, os
+import socket
+import schedule
+import requests, subprocess
+import os, time, schedule
+from multiprocessing import Process
+from subprocess import Popen, PIPE
+import subprocess
+import time, schedule, socket, sqlite3, os
+import binascii
 
 ## Set channels to be monitored
 channel_wlan1 = '6'  # 1 of 2.4GHz
