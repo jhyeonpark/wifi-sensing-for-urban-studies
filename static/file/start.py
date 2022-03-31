@@ -36,19 +36,14 @@ import subprocess
 import time, schedule, socket, sqlite3, os
 import binascii
 
-## Set channels to be monitored
-channel_wlan1 = '6'  # 1 of 2.4GHz
+channel_wlan1 = '1'  # 2.4GHz only
 interface_wlan1 = 'wlan1mon'
 monitor_enable_wlan1 = 'ifconfig wlan1 down; iw dev wlan1 interface add wlan1mon type monitor; ifconfig wlan1mon down; iw dev wlan1mon set type monitor; ifconfig wlan1mon up'
 monitor_disable_wlan1 = 'iw dev wlan1mon del; ifconfig wlan1 up'
 change_channel_wlan1 = 'iw dev wlan1mon set channel %s'
 
-## Set device name
-device_name = 'WiFi_sensor_1'
-
 queue = multiprocessing.Queue()
 
-## Set WiFi frame
 subtypes_management = {
     0: 'association-request',
     1: 'association-response',
@@ -92,10 +87,11 @@ subtypes_data = {
     14: 'qos-contention-free-poll-empty'
 }
 
-## Set writer
+
+# filename = 'raw_wifi_' + device_name + '.sqlite3'
 def writer():
-    date_string = time.strftime("%Y-%m-%d_%H")
-    filename = 'raw_wifi_' + date_string + '_' + device_name + '.sqlite3' # Filename setting using written date and device_name 
+    date_string = time.strftime("%Y-%m-%d") + "HMS" + time.strftime("%H_%M_%S")
+    filename = 'wifi_' + date_string + '.sqlite3'
     db = sqlite3.connect('/home/pi/' + filename)
     db.text_factory = str
 
@@ -114,15 +110,11 @@ def writer():
                         ":subtype,"
                         ":strength,"
                         ":source_address,"
-                        ":hashed_source_address,"
                         ":destination_address,"
-                        ":hashed_dest_address,"
                         ":access_point_name,"
                         ":access_point_address,"
-                        ":device_name,"
                         ":sequence_number,"
-                        ":channel,"
-                        ":info"
+                        ":channel"
                         ")"
                     )
                     cursor.execute(insert.decode('utf-8'), item)
@@ -143,15 +135,11 @@ def writer():
         "subtype,"
         "strength,"
         "source_address,"
-        "hashed_source_address,"
         "destination_address,"
-        "hashed_dest_address,"
         "access_point_name,"
         "access_point_address,"
-        "device_name,"
         "sequence_number,"
-        "channel,"
-        "info"
+        "channel"
         ")"
     )
     cursor.execute(create.decode('utf-8'))
@@ -162,11 +150,11 @@ def writer():
     return stop
 
 
-## Accessing MAC addresses as alphabet and number
 def to_address(address):  # decode a MAC or BSSID address
     return ':'.join('%02x' % ord(b) for b in address)
 
-## Sniffing with the interface wlan and channel
+
+# Sniffing with the interface wlan and channel
 def sniff(interface, channel):
     max_packet_size = -1  # bytes
     promiscuous = 1  # boolean masquerading as an int
@@ -182,7 +170,7 @@ def sniff(interface, channel):
             frame = packet.data
             packet_len = socket.ntohs(packet.length)
             index = packet_len + 22
-            infor = binascii.hexlify(data).decode()
+
             try:
                 i, = struct.unpack("<H", data[index:index + 2])
                 seq = i >> 4
@@ -190,14 +178,7 @@ def sniff(interface, channel):
                 seq = 'NULL'
                 frag = 'NULL'
 
-            # Hashing MAC addresses for privacy issues
-            try:
-                hashed_source_address = hashlib.sha256(to_address(frame.mgmt.src).encode('utf-8')).hexdigest()[:12]
-                hashed_dest_address = hashlib.sha256(to_address(frame.mgmt.dst).encode('utf-8')).hexdigest()[:12]
-            except AttributeError:
-                hashed_source_address = 'NULL'
-                hashed_dest_address = 'NULL'
-            
+
             if frame.type == dpkt.ieee80211.MGMT_TYPE and subtypes_management[frame.subtype] != 'beacon':
                 record = {
                     'timestamp': timestamp,
@@ -205,18 +186,13 @@ def sniff(interface, channel):
                     'subtype': subtypes_management[frame.subtype],
                     'strength': packet_signal,
                     'source_address': to_address(frame.mgmt.src),
-                    'hashed_source_address': hashed_source_address,
                     'destination_address': to_address(frame.mgmt.dst),
-                    'hashed_dest_address': hashed_dest_address,
                     'access_point_name': frame.ssid.data if hasattr(frame, 'ssid') else '(n/a)',
                     'access_point_address': to_address(frame.mgmt.bssid),
-                    'device_name': device_name,
                     'sequence_number': seq,
-                    'channel': channel,
-                    'info': infor
+                    'channel': channel
                 }
                 queue.put(record)
-
             elif frame.type == dpkt.ieee80211.DATA_TYPE:
                 record = {
                     'timestamp': timestamp,
@@ -224,16 +200,12 @@ def sniff(interface, channel):
                     'subtype': subtypes_data[frame.subtype],
                     'strength': packet_signal,
                     'source_address': to_address(frame.data_frame.src),
-                    'hashed_source_address': hashed_source_address,
                     'destination_address': to_address(frame.data_frame.dst),
-                    'hashed_dest_address': hashed_dest_address,
                     'access_point_name': '(n/a)',  # not available in data packets
                     'access_point_address': to_address(frame.data_frame.bssid) if hasattr(frame.data_frame,
                                                                                           'bssid') else '(n/a)',
-                    'device_name': device_name,
                     'sequence_number': seq,
-                    'channel': channel,
-                    'info': infor
+                    'channel': channel
                 }
                 queue.put(record)
         except Exception as e:
@@ -241,61 +213,68 @@ def sniff(interface, channel):
 
     packets.loop(-1, loops)
 
-## Bluetooth setting
+
 def bluetooth_sniff():
     # Bluetooth sniffing
     print('Sniffing Bluetooth')
     os.system('Bluelog/bluelog -n -t -f -a 5 -d')
     time.sleep(1)
 
-## Uploading small data on Dropbox
-def upload_turnoff():
-    # Making last txt of Wi-Fi results
-    date_string = time.strftime("%Y-%m-%d_%H")
-    filename = 'raw_wifi_' + date_string + '_' + device_name + '.sqlite3'
-    connection = sqlite3.connect('/home/pi/' + filename)
-    cursor = connection.cursor()
-    cursor.execute("SELECT * FROM packets ORDER BY timestamp DESC LIMIT 10")
-    result = cursor.fetchone()
-    connection.close()
 
-    list_file = os.listdir('/home/pi')
-    list_file = sorted(list_file)
-    list_file_str = '\n'.join(list_file)
+def upload():
+    date_string = time.strftime("%Y-%m-%d") + "HMS" + time.strftime("%H_%M_%S")
+    filename_storage = 'storage_' + date_string + '.txt'
+    os.system('df -h' + ' > ' + filename_storage)
 
-    with open('/home/pi/' + filename + '_last.txt', "w") as f:
-        for i in range(10):
-            f.write(str(result))
-        f.write(list_file_str)
+    filename_list = 'list_' + date_string + '.txt'
+    os.system('ls -alh' + ' > ' + filename_list)
 
-    time.sleep(5)
+    
+    ## Loading
+    upsentence = '/home/pi/Dropbox-Uploader/dropbox_uploader.sh upload' + ' ' + '/home/pi/' + filename_storage + ' ' + '/'
+    os.system(upsentence)
+    time.sleep(1)
 
-    upsentence = "/home/pi/Dropbox-Uploader/dropbox_uploader.sh upload" + " " + '/home/pi/' + filename + '_last.txt' + " " + '/wifi/'
-    subprocess.Popen(upsentence, shell=True)
-    time.sleep(15)
-    os.system('sudo ifconfig wlan0 down')
+    upsentence1 = '/home/pi/Dropbox-Uploader/dropbox_uploader.sh upload' + ' ' + '/home/pi/' + filename_list + ' ' + '/'
+    os.system(upsentence1)
+
+    ## Waiting the uploading
 
 
-## Starting sensing
 def start():
+    ## Synchronize the time
+    os.system('sudo apt-get install ntpdate')  # Install network server
+    time.sleep(1)
+    os.system('sudo ntpdate -u 3.kr.pool.ntp.org')  # Download network server clock
+    time.sleep(1)
+    os.system('sudo timedatectl set-timezone Asia/Seoul')  # time-set for Asia/Seoul
+    time.sleep(1)
 
-    bluetooth_sniff() # Bluetooth sniffing
-    t = threading.Timer(15, upload_turnoff)
-    t.start()
-
-    os.system(monitor_enable_wlan1)
-
+    ## Upload battery status and list of the pi to dropbox
+    upload()
     time.sleep(5)
+
+    ## Monitor mode setting
+    os.system(monitor_enable_wlan1)
+      os.system('sudo ifconfig wlan0 down')
+    time.sleep(1)
+
+    ## Change the channel to 1, 6, and 11
     os.system(change_channel_wlan1 % channel_wlan1)
-    
-    print('Writing')
+    ## Bluetooth off
+    os.system('sudo systemctl disable bluetooth.service')
+    ## Turn off the HDMI for saving battery
+    os.system('sudo /opt/vc/bin/tvservice -o')
+
+    time.sleep(1)
+
     stop_writing = writer()
-    
     try:
         print('start wlan1')
         w1 = Process(target=sniff, args=(interface_wlan1, channel_wlan1))
 
         w1.start()
+  
         w1.join()
 
     except KeyboardInterrupt:
@@ -304,5 +283,5 @@ def start():
     finally:
         stop_writing.set()
         os.system(monitor_disable_wlan1)
-
+      
 start()

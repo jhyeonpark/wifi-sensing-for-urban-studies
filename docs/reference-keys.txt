@@ -8,6 +8,7 @@ prerequisite
 how-to-build-a-sensor
 getting-started-with-pi
 wifi-data-analysis
+preprocessing
 count
 location
 track

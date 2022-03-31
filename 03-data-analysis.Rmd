@@ -11,7 +11,13 @@ Using WiFi sensing technologies we identify five main metrics on pedestrian beha
 
 The following sections cover how to generate the metrics. 
  
+## Preprocessing
 
+#### Filter 1: Removal of random MAC addresses {-}
+
+#### Filter 2: Removal of non-mobile devices {-}
+
+#### Filter 3: Removal of rarely detected devices {-}
 
 ## Count
 
