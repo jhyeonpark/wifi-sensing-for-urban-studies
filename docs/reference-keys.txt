@@ -15,12 +15,12 @@ location
 track
 identify
 activities
-wifi-data-preprocessing
-reading-data
-preprocessing-data
 wifi-data-analysis-1
 count-1
 location-1
 track-1
 identify-1
 activities-1
+wifi-data-preprocessing
+reading-data
+preprocessing-data

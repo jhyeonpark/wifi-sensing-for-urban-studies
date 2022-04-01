@@ -247,25 +247,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>If you don’t have the data, use <a href="./static/file/wifi-1/wifi_2020-07-13HMS09_18_32.sqlite3">this</a></li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="wifi-data-preprocessing.html#cb48-1" aria-hidden="true" tabindex="-1"></a>db_raw_1a <span class="ot">&lt;-</span> <span class="fu">setDT</span>(</span>
-<span id="cb48-2"><a href="wifi-data-preprocessing.html#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dbGetQuery</span>(<span class="fu">dbConnect</span>(<span class="fu">SQLite</span>(), <span class="at">dbname =</span> <span class="st">&quot;./static/file/wifi-1/wifi_2020-07-13HMS09_18_32.sqlite3&quot;</span>),</span>
-<span id="cb48-3"><a href="wifi-data-preprocessing.html#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;SELECT timestamp, type, subtype, strength, source_address, destination_address,</span></span>
-<span id="cb48-4"><a href="wifi-data-preprocessing.html#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="st">  access_point_name, access_point_address, sequence_number, channel, info</span></span>
-<span id="cb48-5"><a href="wifi-data-preprocessing.html#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="st">  FROM packets&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">collect</span>())</span>
-<span id="cb48-6"><a href="wifi-data-preprocessing.html#cb48-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-7"><a href="wifi-data-preprocessing.html#cb48-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(db_raw_1a, <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="wifi-data-preprocessing.html#cb1-1" aria-hidden="true" tabindex="-1"></a>db_raw_1a <span class="ot">&lt;-</span> <span class="fu">setDT</span>(</span>
+<span id="cb1-2"><a href="wifi-data-preprocessing.html#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dbGetQuery</span>(<span class="fu">dbConnect</span>(<span class="fu">SQLite</span>(), <span class="at">dbname =</span> <span class="st">&quot;./static/file/wifi-1/wifi_2020-07-13HMS09_18_32.sqlite3&quot;</span>),</span>
+<span id="cb1-3"><a href="wifi-data-preprocessing.html#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;SELECT timestamp, type, subtype, strength, source_address, destination_address,</span></span>
+<span id="cb1-4"><a href="wifi-data-preprocessing.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="st">  access_point_name, access_point_address, sequence_number, channel, info</span></span>
+<span id="cb1-5"><a href="wifi-data-preprocessing.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="st">  FROM packets&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">collect</span>())</span>
+<span id="cb1-6"><a href="wifi-data-preprocessing.html#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="wifi-data-preprocessing.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(db_raw_1a, <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##                     timestamp       type       subtype strength
 ## 1: 2020-07-13T09:18:33.306726 management probe-request      -81
 ## 2: 2020-07-13T09:18:33.319097 management probe-request      -81
 ## 3: 2020-07-13T09:18:35.056632 management probe-request      -15
-##       source_address destination_address access_point_name
-## 1: 5c:c5:d4:0a:34:d0   ff:ff:ff:ff:ff:ff                  
-## 2: 5c:c5:d4:0a:34:d0   ff:ff:ff:ff:ff:ff    SK_WiFi908A_5G
-## 3: d0:7f:a0:40:be:6b   ff:ff:ff:ff:ff:ff                  
-##    access_point_address sequence_number channel
-## 1:    ff:ff:ff:ff:ff:ff            3370       6
-## 2:    ff:ff:ff:ff:ff:ff            3371       6
-## 3:    ff:ff:ff:ff:ff:ff            2598       1
+##       source_address destination_address access_point_name access_point_address
+## 1: 5c:c5:d4:0a:34:d0   ff:ff:ff:ff:ff:ff                      ff:ff:ff:ff:ff:ff
+## 2: 5c:c5:d4:0a:34:d0   ff:ff:ff:ff:ff:ff    SK_WiFi908A_5G    ff:ff:ff:ff:ff:ff
+## 3: d0:7f:a0:40:be:6b   ff:ff:ff:ff:ff:ff                      ff:ff:ff:ff:ff:ff
+##    sequence_number channel
+## 1:            3370       6
+## 2:            3371       6
+## 3:            2598       1
 ##                                                                                                                                                                                                                                                            info
 ## 1:                             000012002e48000000028509a000af01000040100000ffffffffffff5cc5d40a34d0ffffffffffffa0d20000010802040b160c1218242d1a6e0917ffff00000000000000000000000000000000000000000032043048606c7f080200008001400000bf0c22718003faff0000faff0000
 ## 2: 000012002e48000000028509a000af01000040100000ffffffffffff5cc5d40a34d0ffffffffffffb0d2000e534b5f57694669393038415f3547010802040b160c1218242d1a6e0917ffff00000000000000000000000000000000000000000032043048606c7f080200008001400000bf0c22718003faff0000faff0000
@@ -337,7 +337,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>How much Random MAC addresses are included?</li>
 </ul>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="wifi-data-preprocessing.html#cb50-1" aria-hidden="true" tabindex="-1"></a>RANDOMIZED_SECOND_ORDER <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;2&quot;</span>, <span class="st">&quot;6&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;e&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="wifi-data-preprocessing.html#cb3-1" aria-hidden="true" tabindex="-1"></a>RANDOMIZED_SECOND_ORDER <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;2&quot;</span>, <span class="st">&quot;6&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;e&quot;</span>)</span></code></pre></div>
 </div>
 <div id="step-2-removal-of-non-mobile-devices" class="section level3 unnumbered hasAnchor">
 <h3>Step 2: Removal of non-mobile devices<a href="wifi-data-preprocessing.html#step-2-removal-of-non-mobile-devices" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -345,10 +345,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Join the MAC Vendor for first 12-chracter of MAC address</li>
 <li>Extract <code>Samsung|Apple|Xiaomi|LG|Huawei|Microsoft|Sony|OnePlus|Google</code></li>
 </ul>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="wifi-data-preprocessing.html#cb51-1" aria-hidden="true" tabindex="-1"></a>MAC_VENDOR <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="st">&quot;https://macaddress.io/database/macaddress.io-db.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb51-2"><a href="wifi-data-preprocessing.html#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(oui, companyName) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">MAC_FIRST6 =</span> <span class="fu">str_sub</span>(<span class="fu">tolower</span>(oui), <span class="dv">1</span>, <span class="dv">8</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb51-3"><a href="wifi-data-preprocessing.html#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>oui) <span class="sc">%&gt;%</span> </span>
-<span id="cb51-4"><a href="wifi-data-preprocessing.html#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.table</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="wifi-data-preprocessing.html#cb4-1" aria-hidden="true" tabindex="-1"></a>MAC_VENDOR <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="st">&quot;https://macaddress.io/database/macaddress.io-db.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="wifi-data-preprocessing.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(oui, companyName) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">MAC_FIRST6 =</span> <span class="fu">str_sub</span>(<span class="fu">tolower</span>(oui), <span class="dv">1</span>, <span class="dv">8</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="wifi-data-preprocessing.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>oui) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-4"><a href="wifi-data-preprocessing.html#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.table</span>()</span></code></pre></div>
 </div>
 <div id="step-3-removal-of-rarely-detected-devices" class="section level3 unnumbered hasAnchor">
 <h3>Step 3: Removal of rarely detected devices<a href="wifi-data-preprocessing.html#step-3-removal-of-rarely-detected-devices" class="anchor-section" aria-label="Anchor link to header"></a></h3>
