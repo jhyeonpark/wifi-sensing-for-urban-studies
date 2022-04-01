@@ -1,0 +1,28 @@
+# WiFi Data Analysis
+Using WiFi sensing technologies we identify five main metrics on pedestrian behaviors. Here is the figure illustrating the metrics.
+
+![](./static/image/data-anaylsis-overview.png)
+
+ - Count – *How many* people are present?
+ - Location – *Where* is that person?
+ - Track – *Where* was the person before?
+ - Identity – *Who* is the person?
+ - Activities – *What* is the person doing?
+
+The following sections cover how to generate the metrics. 
+ 
+[WiFi](./static/file/wifi-2/wifi-gy-200711.csv)
+[GPS](./static/file/wifi-2/GPS_5s.csv)
+ 
+## Count
+- Q: How many people (device) in your data-gathering experiment? Make the plot of unique number of device by time.
+
+## Location
+
+## Track
+
+## Identify
+
+## Activities
+- Q: Who are people staying?
+

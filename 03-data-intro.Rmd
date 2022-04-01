@@ -1,0 +1,98 @@
+# WiFi Data Preprocessing
+This is to understand the raw WiFi data collected and how to filter the raw data.
+
+## Reading data
+### Step 1: Bring your data from Pi {-}
+1. Download [DB Browser for SQLlite](https://sqlitebrowser.org/).
+
+2. Bring your data via FileZlia
+    - When you plug your sensor, `sudo systemctl stop wifi_monitor` I recommend to stop the automatical setting.
+
+3. Open the data using the DB Browser for SQLlite
+
+### Step 2: Read the data in R {-}
+
+```{r, include = F}
+#### Set up ####
+rm(list = ls())
+Packages <- c("tidytext", "keras", "tidyverse",
+              "ggmap", "mAPols", "data.table", "RPresto",
+              "DBI", "RSQLite", "lubridate", "tidyr",
+              "stringr", "readxl", "reshape2", "ggplot2", 
+              "OpenStreetMap", "XML", "rgdal", "knitr", "leaflet", "sf", "foreach",
+              "igraph", "ggraph", "devtools")
+lapply(Packages, require, character.only = TRUE)
+
+Packages <- c("spdplyr", "dbplyr",  "dplyr")
+lapply(Packages, require, character.only = TRUE)
+
+options(java.parameters = "-Xmx8192m")
+memory.limit() / 1024
+memory.size()
+options("scipen" = 100, "digits" = 4)
+```
+
+- Bring your data here
+  - If you don't have the data, use [this](./static/file/wifi-1/wifi_2020-07-13HMS09_18_32.sqlite3)
+
+```{r}
+db_raw_1a <- setDT(
+  dbGetQuery(dbConnect(SQLite(), dbname = "./static/file/wifi-1/wifi_2020-07-13HMS09_18_32.sqlite3"),
+  "SELECT timestamp, type, subtype, strength, source_address, destination_address,
+  access_point_name, access_point_address, sequence_number, channel, info
+  FROM packets") %>% collect())
+
+head(db_raw_1a, 3)
+```
+
+#### Data Description {-}
+| Field name | Description |
+| ---------- | ----------- |
+| timestamp | The time at which the packet detected at sensor |
+| Type/subtype |	Type of packet |
+| Strength | The strength of the received signal at sensor |
+| Source address	| The MAC address of the device that creates the original message |
+| Destination address	| The MAC address of the device that eventually receives the message |
+| Access point address |	The MAC address of the device that involves delivering |
+| Sequence number | - |
+| Channel | Adapter set be to monitor |
+| Info | raw |
+
+- The info column, is segmented to each field by hex (raw) via `binascii.hexlify`. [Here](https://www.slideshare.net/frnsbrdvld/asscii-codes)
+  ![Source: https://i.imgur.com/clbtsXw.png](./static/image/clbtsXw.png)
+
+
+## Preprocessing data
+
+
+### Step 1: Removal of random MAC addresses {-}
+You can assess the random MAC address [here](https://community.cisco.com/t5/security-documents/random-mac-address-how-to-deal-with-it-using-ise/ta-p/4049321)
+
+  - How much Random MAC addresses are included?
+
+```{r}
+RANDOMIZED_SECOND_ORDER <- c("2", "6", "a", "e")
+```
+
+### Step 2: Removal of non-mobile devices {-}
+- Join the MAC Vendor for first 12-chracter of MAC address
+- Extract `Samsung|Apple|Xiaomi|LG|Huawei|Microsoft|Sony|OnePlus|Google`
+
+```{r}
+MAC_VENDOR <- fread("https://macaddress.io/database/macaddress.io-db.csv") %>%
+  select(oui, companyName) %>% mutate(MAC_FIRST6 = str_sub(tolower(oui), 1, 8)) %>%
+  select(-oui) %>% 
+  as.data.table()
+
+```
+
+### Step 3: Removal of rarely detected devices {-}
+- Calculate the duration of device in your dataset
+- Filter out the short duration 
+
+
+
+
+
+
+

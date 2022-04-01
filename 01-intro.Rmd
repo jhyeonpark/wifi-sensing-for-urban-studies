@@ -1,15 +1,31 @@
-# Hello bookdown 
+# Introduction
+## Our sensor
+The sensor is a device that is designed to measure pedestrian behaviors. The following functions are available:
 
-All chapters start with a first-level heading followed by your chapter title, like the line above. There should be only one first-level heading (`#`) per .Rmd file.
+ - Detecting WiFi packets
+ - Recording
 
-## A section
+![](./static/image/wifi-sensor-comp.png)
 
-All chapter sections start with a second-level (`##`) or higher heading followed by your section title, like the sections above and below here. You can have as many as you want within a chapter.
+## Prerequisite
+### Hardware {-}
+| Item                  | Function                           | Requirement                    |
+|-----------------------|------------------------------------|--------------------------------|
+| Laptop and LAN cable  | To access and control your sensor  |                                |
+| Raspberry Pi board    | To build your sensor               | Pi 3B/3B+ or a higher model Pi |
+| WiFi adapter          | To capture WiFi packets            | Check your chipset that supports 'monitoring mode' [here](https://unix.stackexchange.com/questions/614984/supported-chipset-for-monitor-mode-and-packet-injection-in-kali-linux) |
+| Micro SD card and adapter  | To build and store the data   | At least 16 GB size |
+| Ethernet cable  | To connect the Pi with your laptop   | |
+| Portable power bank | To run the sensor in outdoor environment | +20000 mAh battery </br> * It lasts one-day in our setting |
+| Pi camera  | To record the scene in the front of sensor  |                      |
 
-### An unnumbered section {-}
+### Software {-}
+ | Item                  | Function                           | Link                    |
+|-----------------------|------------------------------------|--------------------------------|
+| PuTTY | To access the Pi by your laptop  | [here](https://www.putty.org/) |
+| Raspberry Pi Imager    | To build Raspberry Pi OS | [here](https://www.raspberrypi.com/software/) |
+| Raspberry Pi Imager    | To build Raspberry Pi OS | [here](https://www.putty.org/) |
 
-Chapters and sections are numbered by default. To un-number a heading, add a `{.unnumbered}` or the shorter `{-}` at the end of the heading, like in this section.
+### Skill {-}
+Learning R and Python will be necessary for sensor building and data analysis. I recommend these classes: [Data Science: Foundations using R Specialization](https://www.coursera.org/specializations/data-science-foundations-r) and [Python for Everybody Specialization](https://www.coursera.org/specializations/python)
 
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
