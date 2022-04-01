@@ -388,10 +388,6 @@ This enables your laptop to access and control your Pi via *a network cable*. We
 ### Step 5: Make our Pi as a sensor {-}
 - Download [Filezlia](https://filezilla-project.org/) and the code [here](./static/file/start.py)
 
-<a id="raw-url" href="./static/file/start.py">Download FILE</a>
-
-
-[File Name](url).
 - Move the 
 
 
@@ -399,4 +395,3 @@ This enables your laptop to access and control your Pi via *a network cable*. We
 
 
 
->>>>>>> 4dc7e96cc21d635ad80bb0928549168917d807a5
