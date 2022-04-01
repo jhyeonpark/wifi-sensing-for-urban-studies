@@ -7,13 +7,26 @@ our-sensor
 prerequisite
 how-to-build-a-sensor
 getting-started-with-pi
+<<<<<<< HEAD
 setting-up-the-pi-to-a-sensor
 wifi-data-preprocessing
 reading-data
 preprocessing-data
 wifi-data-analysis
+=======
+preprocessing
+>>>>>>> 4dc7e96cc21d635ad80bb0928549168917d807a5
 count
 location
 track
 identify
 activities
+footnotes-and-citations
+footnotes
+citations
+wifi-data-analysis-1
+count-1
+location-1
+track-1
+identify-1
+activities-1

@@ -12,7 +12,11 @@ import random
 import time
 import multiprocessing
 import threading
+<<<<<<< HEAD
 import queue
+=======
+import Queue
+>>>>>>> 4dc7e96cc21d635ad80bb0928549168917d807a5
 import sqlite3
 import pcapy
 import dpkt
@@ -36,7 +40,11 @@ import subprocess
 import time, schedule, socket, sqlite3, os
 import binascii
 
+<<<<<<< HEAD
 channel_wlan1 = '6'  # 2.4GHz only
+=======
+channel_wlan1 = '1'  # 2.4GHz only
+>>>>>>> 4dc7e96cc21d635ad80bb0928549168917d807a5
 interface_wlan1 = 'wlan1mon'
 monitor_enable_wlan1 = 'ifconfig wlan1 down; iw dev wlan1 interface add wlan1mon type monitor; ifconfig wlan1mon down; iw dev wlan1mon set type monitor; ifconfig wlan1mon up'
 monitor_disable_wlan1 = 'iw dev wlan1mon del; ifconfig wlan1 up'
@@ -44,7 +52,10 @@ change_channel_wlan1 = 'iw dev wlan1mon set channel %s'
 
 queue = multiprocessing.Queue()
 
+<<<<<<< HEAD
 ## Set the WiFi frame
+=======
+>>>>>>> 4dc7e96cc21d635ad80bb0928549168917d807a5
 subtypes_management = {
     0: 'association-request',
     1: 'association-response',
@@ -88,7 +99,11 @@ subtypes_data = {
     14: 'qos-contention-free-poll-empty'
 }
 
+<<<<<<< HEAD
 ## Set the writer
+=======
+
+>>>>>>> 4dc7e96cc21d635ad80bb0928549168917d807a5
 # filename = 'raw_wifi_' + device_name + '.sqlite3'
 def writer():
     date_string = time.strftime("%Y-%m-%d") + "HMS" + time.strftime("%H_%M_%S")
@@ -115,11 +130,18 @@ def writer():
                         ":access_point_name,"
                         ":access_point_address,"
                         ":sequence_number,"
+<<<<<<< HEAD
                         ":channel,"
                         ":info"
                         ")"
                     )
                     cursor.execute(insert, item)
+=======
+                        ":channel"
+                        ")"
+                    )
+                    cursor.execute(insert.decode('utf-8'), item)
+>>>>>>> 4dc7e96cc21d635ad80bb0928549168917d807a5
                 db.commit()
                 cursor.close()
                 time.sleep(1)  # seconds
@@ -141,17 +163,32 @@ def writer():
         "access_point_name,"
         "access_point_address,"
         "sequence_number,"
+<<<<<<< HEAD
         "channel,"
         "info"
         ")"
     )
     cursor.execute(create)
+=======
+        "channel"
+        ")"
+    )
+    cursor.execute(create.decode('utf-8'))
+>>>>>>> 4dc7e96cc21d635ad80bb0928549168917d807a5
     db.commit()
     cursor.close()
     stop = multiprocessing.Event()
     multiprocessing.Process(target=write, args=[stop]).start()
     return stop
 
+<<<<<<< HEAD
+=======
+
+def to_address(address):  # decode a MAC or BSSID address
+    return ':'.join('%02x' % ord(b) for b in address)
+
+
+>>>>>>> 4dc7e96cc21d635ad80bb0928549168917d807a5
 # Sniffing with the interface wlan and channel
 def sniff(interface, channel):
     max_packet_size = -1  # bytes
@@ -168,7 +205,10 @@ def sniff(interface, channel):
             frame = packet.data
             packet_len = socket.ntohs(packet.length)
             index = packet_len + 22
+<<<<<<< HEAD
             infor = binascii.hexlify(data)
+=======
+>>>>>>> 4dc7e96cc21d635ad80bb0928549168917d807a5
 
             try:
                 i, = struct.unpack("<H", data[index:index + 2])
@@ -184,6 +224,7 @@ def sniff(interface, channel):
                     'type': 'management',
                     'subtype': subtypes_management[frame.subtype],
                     'strength': packet_signal,
+<<<<<<< HEAD
                     'source_address': binascii.hexlify(frame.mgmt.src),
                     'destination_address': binascii.hexlify(frame.mgmt.dst),
                     'access_point_name': frame.ssid.data if hasattr(frame, 'ssid') else '(n/a)',
@@ -191,6 +232,14 @@ def sniff(interface, channel):
                     'sequence_number': seq,
                     'channel': channel,
                     'info': infor
+=======
+                    'source_address': to_address(frame.mgmt.src),
+                    'destination_address': to_address(frame.mgmt.dst),
+                    'access_point_name': frame.ssid.data if hasattr(frame, 'ssid') else '(n/a)',
+                    'access_point_address': to_address(frame.mgmt.bssid),
+                    'sequence_number': seq,
+                    'channel': channel
+>>>>>>> 4dc7e96cc21d635ad80bb0928549168917d807a5
                 }
                 queue.put(record)
             elif frame.type == dpkt.ieee80211.DATA_TYPE:
@@ -199,6 +248,7 @@ def sniff(interface, channel):
                     'type': 'data',
                     'subtype': subtypes_data[frame.subtype],
                     'strength': packet_signal,
+<<<<<<< HEAD
                     'source_address': binascii.hexlify(frame.data_frame.src),
                     'destination_address': binascii.hexlify(frame.data_frame.dst),
                     'access_point_name': '(n/a)',  # not available in data packets
@@ -207,6 +257,15 @@ def sniff(interface, channel):
                     'sequence_number': seq,
                     'channel': channel,
                     'info': infor
+=======
+                    'source_address': to_address(frame.data_frame.src),
+                    'destination_address': to_address(frame.data_frame.dst),
+                    'access_point_name': '(n/a)',  # not available in data packets
+                    'access_point_address': to_address(frame.data_frame.bssid) if hasattr(frame.data_frame,
+                                                                                          'bssid') else '(n/a)',
+                    'sequence_number': seq,
+                    'channel': channel
+>>>>>>> 4dc7e96cc21d635ad80bb0928549168917d807a5
                 }
                 queue.put(record)
         except Exception as e:
@@ -214,14 +273,22 @@ def sniff(interface, channel):
 
     packets.loop(-1, loops)
 
+<<<<<<< HEAD
 ## Sniffer of Bluetooth
+=======
+
+>>>>>>> 4dc7e96cc21d635ad80bb0928549168917d807a5
 def bluetooth_sniff():
     # Bluetooth sniffing
     print('Sniffing Bluetooth')
     os.system('Bluelog/bluelog -n -t -f -a 5 -d')
     time.sleep(1)
 
+<<<<<<< HEAD
 ## Uploader of Dropbox
+=======
+
+>>>>>>> 4dc7e96cc21d635ad80bb0928549168917d807a5
 def upload():
     date_string = time.strftime("%Y-%m-%d") + "HMS" + time.strftime("%H_%M_%S")
     filename_storage = 'storage_' + date_string + '.txt'
@@ -230,6 +297,10 @@ def upload():
     filename_list = 'list_' + date_string + '.txt'
     os.system('ls -alh' + ' > ' + filename_list)
 
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 4dc7e96cc21d635ad80bb0928549168917d807a5
     ## Loading
     upsentence = '/home/pi/Dropbox-Uploader/dropbox_uploader.sh upload' + ' ' + '/home/pi/' + filename_storage + ' ' + '/'
     os.system(upsentence)
@@ -240,6 +311,7 @@ def upload():
 
     ## Waiting the uploading
 
+<<<<<<< HEAD
 def camImage():
     PHOTOFORMAT = 'jpeg'
     with picamera.PiCamera() as camera:
@@ -269,12 +341,18 @@ def start():
     print('Start the code')
 
     ## Synchronize the time (1-5 secoond)
+=======
+
+def start():
+    ## Synchronize the time
+>>>>>>> 4dc7e96cc21d635ad80bb0928549168917d807a5
     os.system('sudo apt-get install ntpdate')  # Install network server
     time.sleep(1)
     os.system('sudo ntpdate -u 3.kr.pool.ntp.org')  # Download network server clock
     time.sleep(1)
     os.system('sudo timedatectl set-timezone Asia/Seoul')  # time-set for Asia/Seoul
     time.sleep(1)
+<<<<<<< HEAD
     print('End the boot and time synchronized')
 
     ## Camera shot
@@ -310,6 +388,27 @@ def start():
     time.sleep(1)
 
     print('Start WiFi sensing (loop)')
+=======
+
+    ## Upload battery status and list of the pi to dropbox
+    upload()
+    time.sleep(5)
+
+    ## Monitor mode setting
+    os.system(monitor_enable_wlan1)
+      os.system('sudo ifconfig wlan0 down')
+    time.sleep(1)
+
+    ## Change the channel to 1, 6, and 11
+    os.system(change_channel_wlan1 % channel_wlan1)
+    ## Bluetooth off
+    os.system('sudo systemctl disable bluetooth.service')
+    ## Turn off the HDMI for saving battery
+    os.system('sudo /opt/vc/bin/tvservice -o')
+
+    time.sleep(1)
+
+>>>>>>> 4dc7e96cc21d635ad80bb0928549168917d807a5
     stop_writing = writer()
     try:
         print('start wlan1')
